@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #eee;
+  background: url('/textures/paper-texture.jpg');
+  --content: #224;
+  --action: #0052f5;
+  scroll-behavior: smooth;
+  --glass-bg: rgba(5, 5, 5, 0);
+  --bubble-bg: rgba(120, 120, 120, 0.17);
+
+  --container-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10),
+    inset 1.8px 3px 0px -2px rgba(255, 255, 255, 0.90),
+    inset -2px -2px 0px -2px rgba(255, 255, 255, 0.80),
+    inset -3px -8px 1px -6px rgba(255, 255, 255, 0.60),
+    inset -0.3px -1px 4px 0px rgba(0, 0, 0, 0.12),
+    inset -1.5px 2.5px 0px -2px rgba(0, 0, 0, 0.20),
+    inset 0px 3px 4px -2px rgba(0, 0, 0, 0.20),
+    inset 2px -6.5px 1px -4px rgba(0, 0, 0, 0.10),
+    0px 1px 5px 0px rgba(0, 0, 0, 0.10),
+    0px 6px 16px 0px rgba(0, 0, 0, 0.08);
+
+  --bubble-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10),
+    inset 2px 1px 0px -1px rgba(255, 255, 255, 0.9),
+    inset -1.5px -1px 0px -1px rgba(255, 255, 255, 0.8),
+    inset -2px -6px 1px -5px rgba(255, 255, 255, 0.6),
+    inset -1px 2px 3px -1px rgba(0, 0, 0, 0.2),
+    inset 0px -4px 1px -2px rgba(0, 0, 0, 0.1),
+    0px 3px 6px 0px rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  background: url('/textures/black-paper-texture.png');
+  --bg: #1b1b1d;
+  --content: #e1e1e1;
+  --action: #03d5ff;
+  --glass-bg: rgba(120, 120, 120, 0.178);
+  --bubble-bg: rgba(120, 120, 120, 0.34);
+}
+
+.glass-container {
+  background: color-mix(in srgb, var(--glass-bg) 30%, transparent);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  box-shadow: var(--container-shadow);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-bubble {
+  background: var(--bubble-bg);
+  backdrop-filter: blur(6px) saturate(150%);
+  -webkit-backdrop-filter: blur(6px) saturate(150%);
+  box-shadow: var(--bubble-shadow);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--content);
+    background-color: var(--bg);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--content);
+    background-color: var(--bg);
+  }
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.1),
+    inset 1px 2px 2px rgba(255,255,255,0.15),
+    inset -1px -2px 2px rgba(0,0,0,0.1),
+    0 4px 20px rgba(0,0,0,0.15);
+}
