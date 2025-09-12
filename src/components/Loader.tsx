@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { ICONS, TEXTURES } from '../constants/constants';
-import { useGLTF } from '@react-three/drei';
 import   ROCKET_GIF from '/rocket.gif';
 import * as three from 'three'
 import { AppContext } from '../providers/AppProvider';
@@ -13,11 +12,11 @@ function Loader() {
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
     const loadedAssets: any = { icons: [], textures: {}};
-
-
+    
+    
     useEffect(() => {
         let loaded = 0;
-        const total = 1 + TEXTURES.length + ICONS.length;
+        const total = TEXTURES.length + ICONS.length;
         const updateProgress = () => {
             loaded += 1;
             setProgress(Math.round((loaded / total) * 100));
@@ -26,11 +25,6 @@ function Loader() {
                 setLoading(false);
             }
         };
-
-        // Preload GLTF model
-        useGLTF.preload('/model/scene.gltf')
-        updateProgress();
-
         // Preload textures
         TEXTURES.forEach((texture) => {
             const tex = new three.TextureLoader();
@@ -86,7 +80,7 @@ function Loader() {
                     animate={{ x: rocketX }}
                     transition={{ type: 'spring', stiffness: 80, damping: 20 }}
                 >
-                    <img src={ROCKET_GIF} alt="Rocket Animation" className="w-full h-full mx-auto" />
+                    <img src={ROCKET_GIF} loading='lazy' alt="Rocket Animation" className="w-full h-full mx-auto" />
                 </motion.div>
                 {/* Percentage Text */}
                 <div className="absolute left-1/2 top-[70%] transform -translate-x-1/2  text-lg font-bold">

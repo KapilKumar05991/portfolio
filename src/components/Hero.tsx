@@ -7,6 +7,7 @@ import { AppContext } from '../providers/AppProvider';
 import Button from './Button';
 import { ArrowRight, FileDown } from 'lucide-react';
 
+
 function RotatingEarth() {
   const context = useContext(AppContext)
   const meshRef = useRef<THREE.Mesh>(null);
