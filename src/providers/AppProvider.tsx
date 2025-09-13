@@ -1,17 +1,8 @@
-import { createContext, useEffect, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 
 
-interface AppState {
-    state: {
-        theme: string
-        icons: any
-        textures: any
-        loading: boolean
-    }
-    setState: Dispatch<SetStateAction<{ theme: string; icons: null; textures: null; loading: boolean; }>>
-}
 
-export const AppContext = createContext<AppState | null>(null)
+export const AppContext = createContext<any>(null)
 
 interface AppProviderProp {
     children: ReactNode
@@ -24,7 +15,7 @@ function AppProvider({ children }: AppProviderProp) {
         textures: null,
         loading: true
     })
-
+    
     useEffect(() => {
         const root = window.document.documentElement
         if(state.theme ==  'dark') {

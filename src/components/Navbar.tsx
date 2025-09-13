@@ -13,7 +13,7 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <nav className="glass max-w-7xl sticky top-2 m-1 sm:mx-auto sm:w-full z-40">
+        <nav className="glass backdrop-blur-3xl max-w-7xl sticky top-2 m-2 sm:mx-auto sm:w-full z-40">
             <div className="mx-auto flex items-center justify-between px-3 lg:px-6 py-3">
                 <div className="text-2xl font-bold text-blue-400 tracking-widest"><a href='#hero' className='hidden sm:inline'>KapilKumar</a><a href='#hero' className='sm:hidden'>KK</a></div>
                 {/* Desktop links */}

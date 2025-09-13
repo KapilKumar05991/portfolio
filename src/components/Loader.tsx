@@ -1,27 +1,34 @@
 import { motion } from 'framer-motion';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { ICONS, TEXTURES } from '../constants/constants';
-import   ROCKET_GIF from '/rocket.gif';
+import ROCKET_GIF from '/rocket.gif';
 import * as three from 'three'
 import { AppContext } from '../providers/AppProvider';
 import Button from './Button';
 
+interface Assets {
+    icons: any
+    textures: any
+}
 
 function Loader() {
-    const context = useContext(AppContext)
+    const {state, setState } = useContext(AppContext)
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
-    const loadedAssets: any = { icons: [], textures: {}};
-    
-    
+    const assets = useRef<Assets>({icons: [],textures: []})
+    const initialized = useRef(false)
     useEffect(() => {
+        if(initialized.current) {
+            return;
+        }
+        initialized.current = true;
         let loaded = 0;
         const total = TEXTURES.length + ICONS.length;
         const updateProgress = () => {
             loaded += 1;
             setProgress(Math.round((loaded / total) * 100));
             if (loaded === total) {
-                context?.setState({...context.state, icons: loadedAssets.icons, textures: loadedAssets.textures})
+                setState({...state, icons: assets.current.icons, textures: assets.current.textures})
                 setLoading(false);
             }
         };
@@ -29,7 +36,7 @@ function Loader() {
         TEXTURES.forEach((texture) => {
             const tex = new three.TextureLoader();
             tex.load(texture.texture_path, (loadedTexture) => {
-                loadedAssets.textures[texture.name] = loadedTexture
+                assets.current.textures[texture.name] = loadedTexture
                 updateProgress();
             }, undefined, updateProgress);
         });
@@ -38,7 +45,7 @@ function Loader() {
         ICONS.forEach((icon) => {
             const tex = new three.TextureLoader();
             tex.load(icon.texture_path, (loadedTexture) => {
-                loadedAssets.icons.push({ name: icon.name, texture: loadedTexture })
+                assets.current.icons.push({ name: icon.name, texture: loadedTexture })
                 updateProgress();
             }, undefined, updateProgress);
         });
@@ -88,7 +95,7 @@ function Loader() {
                 </div>
             </div>
             <Button
-             onClick={() => {context?.setState({...context.state,loading:false})}}
+             onClick={() => {setState({...state,loading:false})}}
             >
                 One More Click
             </Button>

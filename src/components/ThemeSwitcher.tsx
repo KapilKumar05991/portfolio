@@ -25,11 +25,11 @@ function ThemeSwitcher() {
     }
     return (
         <div
-            className="glass-container relative w-40 h-12 p-1 flex items-center"
+            className="glass-container backdrop-blur-sm relative w-40 h-12 p-1 flex items-center"
             role="radiogroup"
         >
             <div
-                className={`glass-bubble absolute top-0.5 h-10`}
+                className={`glass-bubble backdrop-blur-xs absolute top-0.5 h-10`}
                 style={{
                     width: `calc(100% / ${OPTIONS.length} - 0.25rem)`,
                     transform: `translateX(${translatePercent}%)`,
