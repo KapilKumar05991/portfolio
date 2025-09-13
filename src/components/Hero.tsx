@@ -36,10 +36,10 @@ export default function Hero() {
                 delay:0.05,
                 duration: 1,
                 stagger: {
-                  each: 0.15,           // gentle stagger
+                  each: 0.15,           
                   from: "start"
                 },
-                ease: "power1.out"      // soft easing
+                ease: "power1.out"    
               });
             }
           });
@@ -49,7 +49,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="min-h-[90vh] flex items-center justify-center p-2 sm:p-4">
+    <section id="hero" className="lg:min-h-[90vh] flex items-center justify-center p-2 sm:p-4">
       <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row md:items-stretch items-center justify-between gap-4">
         {/* Left: Animated Text */}
         <div className="glass backdrop-blur-3xl p-4 px-8 py-4 lg:py-6 flex flex-col gap-4">

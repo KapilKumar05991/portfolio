@@ -4,7 +4,7 @@ import Button from "./Button";
 
 export default function Projects() {
     return (
-        <section id="projects" className="min-h-screen flex items-center justify-center p-2 sm:p-4">
+        <section id="projects" className="flex items-center justify-center p-2 sm:p-4">
             <div className="glass backdrop-blur-3xl max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col items-center text-center">
                 <h2 className="text-4xl md:text-5xl font-extrabold text-blue-400">Projects</h2>
                 <p className="font-semibold text-lg sm:text-xl max-w-2xl mx-auto my-4">

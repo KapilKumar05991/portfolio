@@ -4,8 +4,9 @@ import { AppContext } from "../providers/AppProvider"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import About from "./About"
-import Projects from "./Projects"
+import { Loading } from "./Loading"
 
+const Projects = lazy(() => import("./Projects"))
 const Skills = lazy(() => import("./Skills"))
 const Contact = lazy(() => import("./Contact"))
 const Hero = lazy(() => import("./Hero"))
@@ -14,7 +15,7 @@ const Loader = lazy(() => import("./Loader"))
 function Layout() {
     const { state } = useContext(AppContext)
     if (state.loading) {
-        return (<Suspense fallback={<div className="min-h-screen flex items-center justify-center"><span className="text-2xl italic animate-pulse">Loading...</span></div>}>
+        return (<Suspense fallback={<Loading/>}>
             <Loader />
         </Suspense>)
     }

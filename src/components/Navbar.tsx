@@ -1,6 +1,7 @@
 import { Contact, HardHat, Phone, Swords } from 'lucide-react';
 import { useState } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
+import { motion } from 'framer-motion';
 
 const NAV_LINKS = [
     { icon: <Contact />, label: 'About', href: '#about' },
@@ -13,7 +14,7 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <nav className="glass backdrop-blur-3xl max-w-7xl sticky top-2 m-2 sm:mx-auto sm:w-full z-40">
+        <nav className="glass backdrop-blur-3xl max-w-7xl sticky top-2 m-2 lg:mx-auto lg:w-full z-40">
             <div className="mx-auto flex items-center justify-between px-3 lg:px-6 py-3">
                 <div className="text-2xl font-bold text-blue-400 tracking-widest"><a href='#hero' className='hidden sm:inline'>KapilKumar</a><a href='#hero' className='sm:hidden'>KK</a></div>
                 {/* Desktop links */}
@@ -46,10 +47,13 @@ export default function Navbar() {
                 </button>
             </div>
             {/* Mobile menu dropdown */}
-            <div
-                className={`lg:hidden transition-all duration-400 overflow-hidden ${menuOpen ? 'min-h-[400px] py-2' : 'max-h-0 py-0'}`}
+            <motion.div
+                initial={{ height: 0 }}
+                animate={{ height: menuOpen ? 400 : 0 }}
+                transition={{ type: "tween", stiffness: 100, damping:30}}
+                className='overflow-hidden'
             >
-                <ul className="h-[400px] flex flex-col justify-evenly items-center gap-4 text-2xl font-medium">
+                <ul className="h-full flex flex-col justify-evenly items-center gap-4 text-2xl font-medium">
                     {NAV_LINKS.map(link => (
                         <li key={link.href}>
                             <a
@@ -63,7 +67,7 @@ export default function Navbar() {
                         </li>
                     ))}
                 </ul>
-            </div>
+            </motion.div>
         </nav>
     );
 } 
