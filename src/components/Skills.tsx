@@ -1,8 +1,7 @@
 import TechIcons from '../models/TechIcons';
 
+
 export default function Skills() {
-  
-  
   return (
     <section id="skills" className="flex items-center justify-center p-2 sm:p-4">
       <div className="glass backdrop-blur-3xl max-w-7xl py-6 w-full mx-auto flex flex-col items-center text-center">

@@ -4,18 +4,20 @@ import Button from './Button';
 import { ArrowRight, FileDown } from 'lucide-react';
 import { Loading } from './Loading';
 import { SplitText } from 'gsap/SplitText';
+gsap.registerPlugin(SplitText)
 const RotatingEarth = lazy(() => import('../models/RotatingEarth'))
 
-gsap.registerPlugin(SplitText)
+
 
 export default function Hero() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const para1Ref = useRef(null);
   const para2Ref = useRef(null);
+
+
   useEffect(() => {
     const segmenter = new Intl.Segmenter("zh", { granularity: "word" });
-
     document.fonts.ready.then(() => {
       [titleRef, subtitleRef, para1Ref, para2Ref].forEach(ref => {
         if (ref.current) {
@@ -33,13 +35,13 @@ export default function Hero() {
               return gsap.from(self.words, {
                 y: 50,
                 opacity: 0,
-                delay:0.05,
+                delay: 0.05,
                 duration: 1,
                 stagger: {
-                  each: 0.15,           
+                  each: 0.15,
                   from: "start"
                 },
-                ease: "power1.out"    
+                ease: "power1.out"
               });
             }
           });

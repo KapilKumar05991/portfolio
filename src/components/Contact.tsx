@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { lazy, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import Button from './Button';
 import { Phone } from 'lucide-react';
-import Telephone from '../models/Telephone';
+const Telephone = lazy(() => import('../models/Telephone'))
+
 
 const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID
