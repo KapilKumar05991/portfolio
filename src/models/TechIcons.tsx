@@ -57,9 +57,16 @@ function Model({ position, texture }: { position: [number, number, number]; text
 function TechIcons() {
     const { state } = useContext(AppContext)
     const icons = state.icons
-
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const width = window.innerWidth
+        if (width < 400) {
+            setIsMobile(true)
+        }
+    }, [])
+    const iconss = isMobile ? icons.slice(4) : icons
     return (
-        icons.map((icon: any, i: number) => (
+        iconss.map((icon: any, i: number) => (
             <div key={i} className="flex flex-col items-center">
                 <h1 className='text-lg sm:text-2xl font-bold'>{icon.name}</h1>
                 <Canvas
