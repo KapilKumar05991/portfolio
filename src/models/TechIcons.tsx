@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import type { Mesh } from "three";
 import { AppContext } from "../providers/AppProvider";
+import { useInView } from "framer-motion";
 
 function Model({ position, texture }: { position: [number, number, number]; texture: any }) {
     const [hovered, setHovered] = useState(false);
@@ -54,29 +55,50 @@ function Model({ position, texture }: { position: [number, number, number]; text
 }
 
 
-function TechIcons() {
-    const { state } = useContext(AppContext)
-    const icons = state.icons
-
+function Icon({ texture }: any) {
+    const canvasRef = useRef(null)
+    const inView = useInView(canvasRef)
     return (
-        icons.map((icon: any, i: number) => (
-            <div key={i} className="flex flex-col items-center">
-                <h1 className='text-lg sm:text-2xl font-bold'>{icon.name}</h1>
-                <Canvas
-                    camera={{ position: [0, 0, 5], fov: 50 }}
-                    style={{ width: '150px', height: '150px' }}
-                    frameloop='always'
-                >
+        <Canvas
+            ref={canvasRef}
+            camera={{ position: [0, 0, 5], fov: 50 }}
+            style={{ width: '150px', height: '150px' }}
+            frameloop={inView ? 'always' : 'demand'}
+        >
+            {inView &&
+                <>
                     <ambientLight intensity={1} />
                     <directionalLight position={[0, 0.5, 10]} intensity={0.5} color="#fff" />
-                    <Model position={[0, 0, 0]} texture={icon.texture} />
+                    <Model position={[0, 0, 0]} texture={texture} />
                     <OrbitControls
                         enableZoom={false}
                         enablePan={false}
                         minPolarAngle={Math.PI / 2}  // Lock vertical angle (X axis)
                         maxPolarAngle={Math.PI / 2}  // Lock vertical angle (X axis)
                     />
-                </Canvas>
+                </>
+            }
+        </Canvas>
+    )
+}
+
+function TechIcons() {
+    const { state } = useContext(AppContext)
+    const icons = state.icons
+    const [isSmallS,setIsSmallS] = useState(false)
+    useEffect(()=>{
+        const width = window.innerWidth
+        if(width < 1024) {
+            setIsSmallS(true)
+        }
+    },[])
+
+    const fIcons = isSmallS ? icons.slice(0,6): icons
+    return (
+        fIcons.map((icon: any, i: number) => (
+            <div key={i} className="flex flex-col items-center">
+                <h1 className='text-lg sm:text-2xl font-bold'>{icon.name}</h1>
+                <Icon texture={icon.texture} />
             </div>
         ))
     )

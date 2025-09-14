@@ -2,39 +2,43 @@ import { useEffect, useRef } from "react";
 
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
+import { useInView } from "framer-motion";
 
 gsap.registerPlugin(SplitText)
 
 export default function About() {
   const textRef = useRef<any>(null);
   const tweenRef = useRef<any>(null);
+  const inView = useInView(textRef)
   useEffect(() => {
-    document.fonts.ready.then(() => {
-      const textElement = textRef.current;
-      if (!textElement) return;
-      gsap.set(textElement, { opacity: 1 });
-
-      const split = new SplitText(textElement, {
-        type: "chars, words",
-        charsClass: "char",
+    if(inView) {
+      document.fonts.ready.then(() => {
+        const textElement = textRef.current;
+        if (!textElement) return;
+        gsap.set(textElement, { opacity: 1 });
+  
+        const split = new SplitText(textElement, {
+          type: "chars, words",
+          charsClass: "char",
+        });
+  
+  
+        tweenRef.current = gsap.from(split.chars, {
+          duration: 0.6,
+          yPercent: () => gsap.utils.random(-150, 150),
+          xPercent: () => gsap.utils.random(-150, 150),
+          stagger: {
+            from: "random",
+            amount: 0.6,
+          },
+          delay: 1,
+          ease: "power3.out",
+          paused: false
+        });
       });
+    }
 
-
-      tweenRef.current = gsap.from(split.chars, {
-        duration: 0.6,
-        yPercent: () => gsap.utils.random(-150, 150),
-        xPercent: () => gsap.utils.random(-150, 150),
-        stagger: {
-          from: "random",
-          amount: 0.6,
-        },
-        delay: 1,
-        ease: "power3.out",
-        paused: false
-      });
-    });
-
-  }, []);
+  }, [inView]);
   return (
     <section id="about" className="flex items-center justify-center p-2 sm:p-4">
       <div className="max-w-7xl backdrop-blur-3xl glass w-full mx-auto p-4 sm:p-8 flex flex-col md:flex-row items-center justify-center gap-12">

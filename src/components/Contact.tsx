@@ -3,7 +3,6 @@ import emailjs from '@emailjs/browser';
 import Button from './Button';
 import { Phone } from 'lucide-react';
 import { Loading } from './Loading';
-import { useInView } from 'framer-motion';
 const Telephone = lazy(() => import('../models/Telephone'))
 
 const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID || ''
@@ -15,7 +14,6 @@ export default function Contact() {
   const form = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
-  const inView = useInView(form)
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,11 +91,9 @@ export default function Contact() {
             </div>
             {/* Right: Telephone */}
             <div className="h-[380px] sm:h-[500px] bg-[#202526] border-4 rounded-md border-gray-400 flex w-full md:w-3/5 items-center justify-center">
-              {inView &&
-                <Suspense fallback={<Loading />}>
-                  <Telephone />
-                </Suspense>
-              }
+              <Suspense fallback={<Loading />}>
+                <Telephone />
+              </Suspense>
             </div>
           </div>
         </div>
