@@ -13,10 +13,9 @@ const PUBLIC_KEY = import.meta.env.VITE_EMAIL_PUBLIC_KEY || ''
 
 export default function Contact() {
   const form = useRef<HTMLFormElement>(null);
-  const contactRef = useRef(null)
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
-  const inView = useInView(contactRef)
+  const inView = useInView(form)
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,7 +49,7 @@ export default function Contact() {
 
   return (
     <>
-      <section ref={contactRef} id="contact" className="flex items-center justify-center p-2 sm:p-4">
+      <section id="contact" className="flex items-center justify-center p-2 sm:p-4">
         <div className="glass backdrop-blur-3xl max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col items-center text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-blue-400">Contact Me</h2>
           <p className="font-semibold text-lg sm:text-xl max-w-2xl mx-auto my-4">
