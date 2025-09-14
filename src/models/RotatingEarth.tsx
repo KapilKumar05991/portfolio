@@ -3,8 +3,6 @@ import { AppContext } from '../providers/AppProvider';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { OrbitControls, Stars } from '@react-three/drei';
-import { useInView } from 'framer-motion';
-
 
 function Model() {
 
@@ -39,17 +37,15 @@ function Model() {
 }
 
 function RotatingEarth() {
-    const canvasRef = useRef(null)
-    const inView = useInView(canvasRef)
     return (
-        <Canvas ref={canvasRef} camera={{ position: [0, 0, 4], fov: 50 }}
+        <Canvas camera={{ position: [0, 0, 4], fov: 50 }}
             style={{ height: '100%', width: '100%' }}
-            frameloop={inView ? 'always' : 'never'}
+            frameloop='always'
         >
             <Stars radius={10} depth={10} count={200} factor={1} saturation={1} fade speed={1} />
             <ambientLight intensity={2.5} />
             <directionalLight position={[5, 5, 5]} intensity={2.5} />
-            {inView && <Model />}
+            <Model />
             <OrbitControls enablePan={false} minDistance={2.5} maxDistance={8} />
         </Canvas>
     )

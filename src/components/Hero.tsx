@@ -4,12 +4,15 @@ import Button from './Button';
 import { ArrowRight, FileDown } from 'lucide-react';
 import { Loading } from './Loading';
 import { SplitText } from 'gsap/SplitText';
+import { useInView } from 'framer-motion';
 gsap.registerPlugin(SplitText)
 const RotatingEarth = lazy(() => import('../models/RotatingEarth'))
 
 
 
 export default function Hero() {
+  const earthRef = useRef(null)
+  const inView = useInView(earthRef)
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const para1Ref = useRef(null);
@@ -73,10 +76,12 @@ export default function Hero() {
           </div>
         </div>
         {/* Right: 3D Rotating Earth */}
-        <div className="md:w-2/5 h-80 md:h-[400px] border-4 rounded-lg border-gray-400 bg-gray-950 flex items-center justify-center w-full">
-          <Suspense fallback={<Loading />}>
-            <RotatingEarth />
-          </Suspense>
+        <div ref={earthRef} className="md:w-2/5 h-80 md:h-[400px] border-4 rounded-lg border-gray-400 bg-gray-950 flex items-center justify-center w-full">
+          {inView &&
+            <Suspense fallback={<Loading />}>
+              <RotatingEarth />
+            </Suspense>
+          }
         </div>
       </div>
     </section>

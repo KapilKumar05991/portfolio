@@ -3,7 +3,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-primary: "Space Grotesk", 'sans-serif';
+  --font-primary: "Space Grotesk", 'Trebuchet MS';
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -16,7 +16,6 @@
   --content: #224;
   --action: #0052f5;
   scroll-behavior: smooth;
-  font-family:'Trebuchet MS';
   --glass-bg: rgba(5, 5, 5, 0);
   --bubble-bg: rgba(120, 120, 120, 0.17);
   --container-shadow:

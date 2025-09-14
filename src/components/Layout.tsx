@@ -20,7 +20,7 @@ function Layout() {
         </Suspense>)
     }
     return (
-        <div className="font-primary min-h-screen">
+        <div className="min-h-screen">
             <Navbar />
             <Hero />
             <About />
