@@ -5,9 +5,9 @@ import { Phone } from 'lucide-react';
 const Telephone = lazy(() => import('../models/Telephone'))
 
 
-const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID
-const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID
-const PUBLIC_KEY = import.meta.env.VITE_EMAIL_PUBLIC_KEY
+const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID || ''
+const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID || ''
+const PUBLIC_KEY = import.meta.env.VITE_EMAIL_PUBLIC_KEY || ''
 
 
 export default function Contact() {

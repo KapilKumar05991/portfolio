@@ -32,7 +32,7 @@ function Model() {
     }, [])
     return (
         <mesh ref={meshRef}>
-            <sphereGeometry args={[1.4, 64, 64]} />
+            <sphereGeometry args={[1.4, 32, 32]} />
             <meshStandardMaterial map={earthTexture} />
         </mesh>
     );

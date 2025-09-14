@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
+
 @import 'tailwindcss';
+
+@theme {
+  --font-primary: "Space Grotesk", 'sans-serif';
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 
 :root {
+  font-family: var(--font-primary);
   --bg: #eee;
   background: url('/textures/paper-texture.jpg');
   --content: #224;

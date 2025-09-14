@@ -5,26 +5,28 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import About from "./About"
 import { Loading } from "./Loading"
+import Projects from "./Projects"
+import Hero from "./Hero"
+import Contact from "./Contact"
 
-const Projects = lazy(() => import("./Projects"))
 const Skills = lazy(() => import("./Skills"))
-const Contact = lazy(() => import("./Contact"))
-const Hero = lazy(() => import("./Hero"))
 const Loader = lazy(() => import("./Loader"))
 
 function Layout() {
     const { state } = useContext(AppContext)
     if (state.loading) {
-        return (<Suspense fallback={<Loading/>}>
+        return (<Suspense fallback={<Loading />}>
             <Loader />
         </Suspense>)
     }
     return (
-        <div className="min-h-screen">
+        <div className="font-primary min-h-screen">
             <Navbar />
             <Hero />
             <About />
-            <Skills />
+            <Suspense fallback={<Loading />}>
+                <Skills />
+            </Suspense>
             <Projects />
             <Contact />
             <Footer />
